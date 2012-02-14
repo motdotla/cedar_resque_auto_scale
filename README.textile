@@ -1,0 +1,25 @@
+h1. CedarResqueAutoScale for Heroku
+
+p. Disclaimer: This is heavily copied from "verboselogging":http://verboselogging.com/2010/07/30/auto-scale-your-resque-workers-on-heroku
+
+p. I have made the following changes:
+* adjust to work on Heroku's Cedar stack
+* require the password to passed in Base64 so that you are not storing it as plain text in your heroku config vars
+
+h2. Usage
+
+1. Drop into your lib/ folder
+
+2. Extend your resque worker like the following example:
+
+<pre>
+  class GumLinkScraper
+    extend CedarResqueAutoScale unless Sinatra::Application.test? || Sinatra::Application.development?
+
+    @queue = :gum_link_scraper
+    
+    def self.perform
+      GumLink.queued.each { |gum_link| gum_link.scrape! }
+    end
+  end
+</pre>
