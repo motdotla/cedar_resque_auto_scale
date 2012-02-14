@@ -31,4 +31,7 @@ irb
 password_64 = Base64.encode64('your_heroku_password')
 </pre>
 
-4. heroku config:add HEROKU_APP="heroku_subdomain" HEROKU_USER="heroku_email" HEROKU_PASS="base64encodedpassword"
+4. Set the appropriate heroku config vars
+<pre>
+heroku config:add HEROKU_APP="heroku_subdomain" HEROKU_USER="heroku_email" HEROKU_PASS="base64encodedpassword"
+</pre>
